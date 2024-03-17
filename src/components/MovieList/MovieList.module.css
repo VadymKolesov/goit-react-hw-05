@@ -1,0 +1,17 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 40px;
+  justify-content: center;
+  padding: 40px;
+}
+
+.item {
+  width: calc((100% - 80px) / 5);
+  cursor: pointer;
+  transition: scale 200ms ease-in-out;
+}
+
+.item:hover {
+  scale: 1.1;
+}

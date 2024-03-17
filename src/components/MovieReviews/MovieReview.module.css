@@ -1,0 +1,10 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.noReviews {
+  margin: 0 auto;
+  font-size: 18px;
+}

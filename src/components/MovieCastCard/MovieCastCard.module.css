@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  height: 350px;
+}
+
+.img {
+  height: 200px;
+  width: 150px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.card div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.character {
+  font-size: 14px;
+}

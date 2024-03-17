@@ -1,0 +1,37 @@
+.card {
+  display: flex;
+  gap: 20px;
+  background-color: white;
+  padding: 40px;
+  border-radius: 30px;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.review {
+  font-size: 14px;
+}
