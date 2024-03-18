@@ -10,7 +10,6 @@ export default function HomePage() {
     async function getTopRatedMovies() {
       try {
         const movies = await fetchTopRatedMovies();
-        console.log(movies);
         setRatedMovies(movies);
       } catch (error) {
         console.log(error);
@@ -22,7 +21,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className={css.title}>Top Rating</h1>
+      <h1 className={css.title}>Trending today</h1>
       {ratedMovies && <MovieList movies={ratedMovies} />}
     </div>
   );
