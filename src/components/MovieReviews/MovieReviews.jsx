@@ -7,18 +7,23 @@ import MovieReviewCard from "../MovieReviewCard/MovieReviewCard";
 export default function MovieReviews() {
   const [reviews, setReviews] = useState(null);
   const { movieID } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     async function getReviews() {
       try {
+        setIsError(false);
+        setIsLoading(true);
         const data = await fetchMovieReviews(movieID);
         if (data.length <= 0) {
           return;
         }
-
         setReviews(data);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     }
     getReviews();
@@ -26,6 +31,9 @@ export default function MovieReviews() {
 
   return (
     <>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Something went wrong. Please, try again.</div>}
+
       {reviews ? (
         <ul className={css.list}>
           {reviews.map((el) => (

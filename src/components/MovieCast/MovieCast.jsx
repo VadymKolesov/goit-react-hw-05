@@ -7,20 +7,30 @@ import MovieCastCard from "../MovieCastCard/MovieCastCard";
 export default function MovieCast() {
   const [cast, setCast] = useState(null);
   const { movieID } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     async function getCast() {
       try {
+        setIsError(false);
+        setIsLoading(true);
         const data = await fetchMovieCast(movieID);
         setCast(data);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     }
     getCast();
   }, [movieID]);
+
   return (
     <ul className={css.list}>
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Something went wrong. Please, try again.</div>}
+
       {cast &&
         cast.map((el) => (
           <li key={el.id}>

@@ -7,6 +7,8 @@ import { useSearchParams } from "react-router-dom";
 export default function MoviesPage() {
   const [movies, setMovies] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const query = searchParams.get("query");
@@ -16,8 +18,16 @@ export default function MoviesPage() {
     }
 
     async function getMoviesByQuery() {
-      const data = await fetchMoviesByQuery(query);
-      setMovies(data);
+      try {
+        setIsError(false);
+        setIsLoading(true);
+        const data = await fetchMoviesByQuery(query);
+        setMovies(data);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
     }
 
     getMoviesByQuery();
@@ -30,6 +40,10 @@ export default function MoviesPage() {
   return (
     <div>
       <SearchForm onSearch={handleSearch} />
+
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Something went wrong. Please, try again.</div>}
+
       {movies && <MovieList movies={movies} />}
     </div>
   );

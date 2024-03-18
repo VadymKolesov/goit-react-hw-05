@@ -5,14 +5,20 @@ import MovieList from "../components/MovieList/MovieList";
 
 export default function HomePage() {
   const [ratedMovies, setRatedMovies] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     async function getTopRatedMovies() {
       try {
+        setIsError(false);
+        setIsLoading(true);
         const movies = await fetchTopRatedMovies();
         setRatedMovies(movies);
-      } catch (error) {
-        console.log(error);
+      } catch {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
       }
     }
 
@@ -22,6 +28,10 @@ export default function HomePage() {
   return (
     <div>
       <h1 className={css.title}>Trending today</h1>
+
+      {isLoading && <div>Loading...</div>}
+      {isError && <div>Something went wrong. Please, try again.</div>}
+
       {ratedMovies && <MovieList movies={ratedMovies} />}
     </div>
   );
